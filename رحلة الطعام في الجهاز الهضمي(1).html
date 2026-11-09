@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>رحلة الطعام في الجهاز الهضمي</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2f6f4;--ink:#0f2f2a;--muted:#3d5a54;--card:#fff;--line:#1f6f62;--accent:#ffd54a;--accent-ink:#1a1400;--btn:#12413a;--btn-ink:#fff;--border:#b9cfc9;--ok:#0b6b3a;--bad:#a02020;--fs:1.25rem;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1a17;--ink:#eaf4f1;--muted:#b5cdc7;--card:#132622;--line:#4fc3ae;--btn:#4fc3ae;--btn-ink:#04201b;--border:#2a4a43;--ok:#6fe3a2;--bad:#ff9a9a;color-scheme:dark}}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Naskh Arabic","Segoe UI",Tahoma,Arial,sans-serif;font-size:var(--fs);line-height:1.9;min-height:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--card);z-index:10}
+.skip{position:absolute;inset-inline-start:.5rem;top:-4rem;background:var(--accent);color:var(--accent-ink);padding:.4rem 1rem;border-radius:6px;z-index:20}
+.skip:focus{top:calc(env(safe-area-inset-top,0px) + .5rem)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:2px solid var(--border);padding:.6rem 1rem;display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+button,select{font:inherit;font-size:1rem;line-height:1.4;padding:.45rem 1rem;border-radius:8px;border:2px solid var(--btn);background:var(--card);color:var(--ink);cursor:pointer}
+button.main{background:var(--btn);color:var(--btn-ink);font-weight:700}
+button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent-ink)}
+.bar label{font-size:1rem}
+#status{flex-basis:100%;font-size:.95rem;color:var(--muted);line-height:1.6;margin:0}
+main{max-width:48rem;margin:0 auto;padding:1.2rem 1.2rem 4rem}
+h1{font-size:2em;line-height:1.5;margin:.8rem 0 .4rem}
+h2{font-size:1.35em;line-height:1.6;margin:1.8rem 0 .4rem}
+.lead{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(12.5rem,1fr));gap:1rem;margin:1.5rem 0}
+.big{display:flex;flex-direction:column;align-items:center;gap:.2rem;padding:1.1rem .8rem;min-height:9rem;text-align:center;background:var(--card);border:3px solid var(--line);border-radius:14px;font-weight:700}
+.big .ico{font-size:2.4rem;line-height:1.3}
+.big small{font-weight:400;font-size:.85em;color:var(--muted)}
+.big.alt{border-style:dashed}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem 1.3rem;margin:.8rem 0}
+.simple{border-inline-start:5px solid var(--line);padding:.3rem 1rem;font-size:1.05em}
+.r:hover,.r:focus,.speaking{background:var(--accent)!important;color:var(--accent-ink)!important;border-radius:6px}
+.r:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,g:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
+input[type=range]{width:100%;margin:.4rem 0;accent-color:var(--line);height:2rem}
+meter{width:100%;height:1.5rem}
+.res{font-weight:700;margin:.3rem 0}
+.qq{border:1px solid var(--border);border-radius:10px;margin:.8rem 0;padding:.5rem 1rem}
+.qq legend{font-weight:700;padding:0 .4rem}
+.opt{display:block;padding:.35rem .6rem;margin:.2rem 0;cursor:pointer}
+.opt input{width:1.2rem;height:1.2rem;margin-inline-end:.5rem;vertical-align:middle}
+.fb{font-weight:700;margin:.3rem 0}
+.fb.ok{color:var(--ok)}.fb.bad{color:var(--bad)}
+.nav{display:flex;flex-wrap:wrap;gap:.6rem;margin:2rem 0}
+dl{margin:0}dl .r{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.5rem 1.2rem;margin-bottom:.7rem}
+dt{font-weight:700}dd{margin:0}
+.cards{display:flex;flex-wrap:wrap;gap:.5rem;margin:.8rem 0}
+.cards button[disabled]{opacity:.45;text-decoration:line-through}
+svg.body{width:100%;max-width:26rem;display:block;margin:.5rem auto;background:var(--card);border:1px solid var(--border);border-radius:12px}
+svg .outline{fill:none;stroke:var(--border);stroke-width:3}
+svg .shp{fill:none;stroke:var(--line);stroke-width:3;stroke-dasharray:6 4}
+svg .slot{cursor:pointer}
+svg .slot.on .shp{stroke-dasharray:none;stroke:#10201c}
+svg text{font-family:inherit;font-size:12px;fill:var(--ink);text-anchor:middle;display:none}
+svg .slot.on text{display:block}
+svg text.in{fill:#10201c}
+svg .num{display:block;font-size:11px;fill:var(--muted)}
+svg .slot.on .num{display:none}
+body{background:radial-gradient(900px 420px at 95% -5%,rgba(79,195,174,.28),transparent 70%),radial-gradient(800px 380px at 0 0,rgba(255,213,74,.22),transparent 70%),var(--bg);background-attachment:fixed}
+.bar{background:color-mix(in srgb,var(--card) 90%,transparent);backdrop-filter:blur(8px);box-shadow:0 2px 12px rgba(0,0,0,.08)}
+button{transition:transform .1s,box-shadow .2s}button:active{transform:scale(.97)}
+button.main{background:linear-gradient(135deg,var(--btn),var(--line))}
+.hero{background:linear-gradient(135deg,#0f3b34,#1f6f62);color:#fff;border-radius:22px;padding:1.4rem 1.7rem;margin:.4rem 0 1rem;box-shadow:0 12px 32px rgba(15,59,52,.28)}
+.hero h1{margin-top:0;color:#fff}.hero .lead{color:#d8efe9}
+.prog{color:#fff;font-weight:700;margin-top:.6rem}
+.track{height:14px;border-radius:99px;background:rgba(255,255,255,.25);overflow:hidden}.track span{display:block;height:100%;background:#ffd54a;border-radius:99px;transition:width .6s}
+.big{border:0;border-top:7px solid var(--c,var(--line));box-shadow:0 4px 16px rgba(0,0,0,.10);color:var(--ink)}
+.big:hover{box-shadow:0 10px 26px rgba(0,0,0,.18)}
+.big .ico{display:grid;place-items:center;width:4.2rem;height:4.2rem;border-radius:50%;background:color-mix(in srgb,var(--c,var(--line)) 20%,var(--card));font-size:2.2rem}
+.big small{background:var(--accent);color:var(--accent-ink);padding:0 .8rem;border-radius:99px;font-weight:700}
+.steps{display:flex;gap:.4rem;margin:.3rem 0 .6rem}.steps i{flex:1;height:9px;border-radius:5px;background:var(--border)}.steps i.past{background:var(--line)}.steps i.cur{background:var(--accent);outline:2px solid var(--ink)}
+.stitle{border-inline-start:9px solid var(--c);padding-inline-start:.8rem}
+h2{display:flex;align-items:center;gap:.6rem}h2::before{content:"";flex:none;width:.5rem;height:1.5rem;border-radius:4px;background:var(--line)}
+.panel,.qq,dl .r{box-shadow:0 3px 12px rgba(0,0,0,.07)}
+.opt{border:2px solid var(--border);border-radius:12px;background:var(--card);margin:.4rem 0}
+.opt:has(input:checked){border-color:var(--line);background:color-mix(in srgb,var(--line) 15%,var(--card))}
+meter{height:1.6rem}
+.cf{position:fixed;top:-16px;width:10px;height:15px;z-index:30;pointer-events:none;border-radius:2px;animation:fall 1.9s ease-in forwards}
+@keyframes fall{to{transform:translateY(108vh) rotate(560deg)}}
+@keyframes up{from{opacity:0;transform:translateY(16px)}}
+@keyframes blink{from{stroke-opacity:.3}to{stroke-opacity:1}}
+@keyframes pop{from{opacity:.1}to{opacity:1}}
+@media (prefers-reduced-motion:no-preference){.grid .big{animation:up .5s both;animation-delay:calc(var(--i,0)*80ms)}.big:hover{transform:translateY(-5px)}svg.body.pick .slot:not(.on) .shp{animation:blink .8s infinite alternate}svg .slot.on .shp{animation:pop .5s}main>*{animation:up .35s both}}
+@media (prefers-reduced-motion:no-preference){.r{transition:background .15s}}
+</style>
+</head>
+<body>
+<a class="skip" href="#app">انتقل إلى المحتوى</a>
+<div class="bar" role="region" aria-label="أدوات القراءة والتنقل">
+  <button id="home">الرئيسية</button>
+  <button id="toggle" class="main" aria-pressed="false">تشغيل القراءة الصوتية</button>
+  <button id="readall">اقرأ الصفحة</button>
+  <button id="stop">إيقاف الصوت</button>
+  <label>السرعة <select id="rate"><option value="0.7">بطيئة</option><option value="0.9" selected>عادية</option><option value="1.15">سريعة</option></select></label>
+  <button id="bigger" aria-label="تكبير الخط">أ+</button>
+  <button id="smaller" aria-label="تصغير الخط">أ−</button>
+  <p id="status" role="status" aria-live="polite">القراءة الصوتية متوقفة. اضغط «تشغيل القراءة الصوتية» ثم مرّر المؤشر فوق أي سطر أو تنقّل بمفتاح Tab ليُقرأ لك.</p>
+</div>
+<main id="app" tabindex="-1"></main>
+
+<script>
+(function(){
+var S=[
+{t:'الفم',i:'👄',d:['تبدأ الرحلة بالمضغ، وهو هضم ميكانيكي يقطّع الطعام إلى قطع صغيرة. يفرز الفم اللعاب الذي يحتوي على إنزيم الأميليز، وهو يبدأ تحليل النشا إلى سكريات أبسط. ثم يشكّل اللسان الطعام على هيئة لقمة جاهزة للبلع.'],s:'نمضغ الطعام بأسناننا فيصير قطعًا صغيرة. اللعاب يبلّل الطعام ويبدأ بهضم النشا. اللسان يجمع الطعام ويدفعه ليُبلع.',
+ q:[['أي إنزيم في اللعاب يبدأ هضم النشا؟',['الأميليز','الببسين','الصفراء'],0,'الأميليز يحلّل النشا إلى سكريات أبسط.'],['المضغ يُعدّ هضمًا من أي نوع؟',['ميكانيكيًا','كيميائيًا','ليس هضمًا'],0,'المضغ يقطّع الطعام فقط دون تغيير تركيبه.'],['ماذا يفعل اللسان بالطعام؟',['يشكّله لقمة','يهضم البروتين','يمتص الماء'],0,'اللسان يجمع الطعام ويشكّل اللقمة للبلع.']]},
+{t:'البلعوم والمريء',i:'⬇️',d:['عند البلع يدفع البلعوم اللقمة إلى الأسفل، وفي اللحظة نفسها يُغلق لسان المزمار القصبة الهوائية كي لا يدخل الطعام إلى الرئتين. بعد ذلك ينقل المريء اللقمة إلى المعدة بحركة تموّجية تسمى الحركة الدودية، ولهذا يمكنك البلع حتى وأنت مستلقٍ.'],s:'نبلع الطعام. غطاء صغير يسدّ الطريق إلى الرئتين. المريء أنبوب يدفع الطعام إلى المعدة.',
+ q:[['ما الذي يغلق القصبة الهوائية أثناء البلع؟',['لسان المزمار','المريء','الكبد'],0,'لسان المزمار يمنع دخول الطعام إلى الرئتين.'],['ما الحركة الدودية؟',['انقباضات متتابعة تدفع الطعام','حركة اللسان','إفراز إنزيم'],0,'انقباضات تموّجية في جدار المريء.'],['إلى أين ينقل المريء اللقمة؟',['المعدة','الرئتين','الأمعاء الغليظة'],0,'المريء يصل البلعوم بالمعدة.']]},
+{t:'المعدة',i:'🥣',d:['المعدة كيس عضلي يخلط الطعام بقوة مع العصارة المعدية. تحتوي هذه العصارة على حمض الهيدروكلوريك الذي يقتل كثيرًا من الجراثيم، وعلى إنزيم الببسين الذي يبدأ هضم البروتينات. يتحوّل الطعام بعد بضع ساعات إلى سائل كثيف يسمى الكيموس، ثم يخرج تدريجيًا إلى الأمعاء الدقيقة.'],s:'المعدة كيس يخلط الطعام. فيها حمض يقتل الجراثيم. وفيها إنزيم يبدأ هضم البروتين. يصير الطعام سائلًا كثيفًا، ثم ينتقل إلى الأمعاء الدقيقة.',
+ q:[['ما الحمض الموجود في العصارة المعدية؟',['الهيدروكلوريك','الخليك','الكربونيك'],0,'حمض الهيدروكلوريك يوفّر الوسط الحامضي القوي.'],['ماذا يهضم الببسين؟',['البروتينات','النشا','الدهون'],0,'الببسين يبدأ هضم البروتينات.'],['ما الكيموس؟',['سائل كثيف ناتج عن خلط الطعام','غاز','قطعة صلبة'],0,'هو الطعام بعد خلطه وهضمه جزئيًا في المعدة.']]},
+{t:'الأمعاء الدقيقة',i:'🌀',d:['طولها نحو ستة أمتار، وفيها يكتمل الهضم ويحدث معظم الامتصاص. يصلها من الكبد سائل الصفراء الذي يفتّت الدهون إلى قطرات صغيرة، ويصلها من البنكرياس عصارة فيها إنزيمات تهضم النشا والبروتين والدهون.','جدار الأمعاء الدقيقة مليء بنتوءات صغيرة تسمى الزغابات، تزيد مساحة السطح كثيرًا، فتنتقل المواد الغذائية عبرها إلى الدم.'],s:'الأمعاء الدقيقة أنبوب طويل. هنا يكتمل الهضم. الكبد والبنكرياس يرسلان سوائل تساعد على الهضم. الغذاء ينتقل من الأمعاء إلى الدم.',
+ q:[['أين يحدث معظم امتصاص الغذاء؟',['الأمعاء الدقيقة','المعدة','المريء'],0,'الأمعاء الدقيقة هي موضع الامتصاص الرئيسي.'],['ماذا تفعل الصفراء؟',['تفتّت الدهون','تهضم البروتين','تمتص الماء'],0,'تحوّل الدهون إلى قطرات صغيرة يسهل هضمها.'],['ما فائدة الزغابات؟',['تزيد مساحة الامتصاص','تنتج الصفراء','تغلق القصبة'],0,'النتوءات تزيد مساحة السطح فيزداد الامتصاص.']]},
+{t:'الأمعاء الغليظة',i:'♻️',d:['طولها نحو متر ونصف. تمتص ما تبقى من الماء والأملاح، وتعيش فيها بكتيريا نافعة تساعد على صحة الجهاز الهضمي. ما لا يُهضم يتجمّع في المستقيم على شكل فضلات، ثم يخرج من الجسم عبر الشرج.'],s:'الأمعاء الغليظة تمتصّ الماء. فيها بكتيريا نافعة. ما بقي من الطعام يصير فضلات. تخرج الفضلات من الجسم.',
+ q:[['ماذا تمتص الأمعاء الغليظة؟',['الماء والأملاح','البروتينات','الدهون'],0,'تمتص الماء والأملاح المتبقية.'],['ما دور البكتيريا النافعة؟',['تساعد صحة الجهاز الهضمي','تسبب المرض دائمًا','لا وجود لها'],0,'تعيش في الأمعاء الغليظة وتفيدها.'],['أين تتجمّع الفضلات قبل خروجها؟',['المستقيم','المعدة','الكبد'],0,'المستقيم هو الجزء الأخير من الأمعاء الغليظة.']]}
+];
+var G=[['الأميليز','إنزيم في اللعاب يبدأ هضم النشا.'],['لسان المزمار','غطاء صغير يغلق القصبة الهوائية عند البلع.'],['الحركة الدودية','انقباضات متتابعة في جدار المريء تدفع الطعام إلى الأسفل.'],['الببسين','إنزيم في المعدة يبدأ هضم البروتينات.'],['الكيموس','السائل الكثيف الذي يتكوّن من الطعام بعد خلطه في المعدة.'],['الصفراء','سائل يصنعه الكبد ويفتّت الدهون إلى قطرات صغيرة.'],['الزغابات','نتوءات صغيرة في جدار الأمعاء الدقيقة تمتص الغذاء إلى الدم.'],['المستقيم','الجزء الأخير من الأمعاء الغليظة، تتجمّع فيه الفضلات قبل خروجها.']];
+
+/* ---------- helpers ---------- */
+var app=document.getElementById('app'),statusEl=document.getElementById('status'),rateSel=document.getElementById('rate'),toggle=document.getElementById('toggle');
+var synth=window.speechSynthesis,on=false,stopQ=false,timer=null,voice=null,cur=null,lastHover=null,view='home',scores={},QS={};
+function $(s,r){return (r||app).querySelector(s)}
+function shuf(a){return a.map(function(x){return[Math.random(),x]}).sort(function(p,q){return p[0]-q[0]}).map(function(p){return p[1]})}
+function setStatus(t){statusEl.textContent=t}
+function mkr(root){root.querySelectorAll('.r').forEach(function(e){if(!e.matches('button,input,label,summary,select,[tabindex],g'))e.tabIndex=0})}
+function pickVoice(){if(!synth)return;voice=synth.getVoices().filter(function(x){return /^ar/i.test(x.lang)})[0]||null}
+if(synth){pickVoice();synth.onvoiceschanged=pickVoice}
+function clearMark(){if(cur){cur.classList.remove('speaking');cur=null}}
+function say(t,el,done){
+  if(!synth||!on){if(done)done();return}
+  synth.cancel();clearMark();
+  var u=new SpeechSynthesisUtterance(t.replace(/\s+/g,' ').trim());
+  u.lang=voice?voice.lang:'ar-SA';if(voice)u.voice=voice;u.rate=parseFloat(rateSel.value);
+  if(el){cur=el;el.classList.add('speaking')}
+  u.onend=u.onerror=function(){if(el&&cur===el)clearMark();if(done)done()};
+  synth.speak(u);
+}
+function txt(el){return el.getAttribute('aria-label')||el.textContent}
+function stop(){stopQ=true;clearTimeout(timer);if(synth)synth.cancel();clearMark()}
+
+/* ---------- activities ---------- */
+function sl(o){return{h:'<p class="r">'+o.intro+'</p><label class="r">'+o.label+': <output>'+o.val+'</output> '+o.unit+'<input type="range" min="'+o.min+'" max="'+o.max+'" step="'+o.step+'" value="'+o.val+'"></label>'+(o.meter?'<meter min="0" max="100" value="0" aria-hidden="true"></meter>':'')+'<p class="r res" aria-live="polite">'+o.out(o.val).t+'</p>',
+ b:function(r){var inp=$('input',r),out=$('output',r),res=$('.res',r),m=$('meter',r);function u(){var v=+inp.value,x=o.out(v);out.textContent=v;res.textContent=x.t;if(m)m.value=x.p||0}inp.addEventListener('input',u);inp.addEventListener('change',function(){say(res.textContent,res)});u()}}}
+var A=[
+sl({intro:'حرّك المؤشر لتغيير مدة المضغ، وشاهد كيف يحوّل الأميليز النشا إلى سكر. يمكنك تجربتها في البيت: امضغ قطعة خبز دقيقة كاملة وانتبه لتغيّر الطعم.',label:'مدة المضغ',unit:'ثانية',min:0,max:60,step:5,val:0,meter:1,out:function(v){var p=Math.round(v/60*100);return{p:p,t:'بعد '+v+' ثانية صار نحو '+p+' بالمئة من النشا سكرًا (نموذج مبسّط). '+(p>=60?'طعم الطعام صار حلوًا.':'ما زال طعمه نشويًّا.')}}}),
+{h:'<p class="r">اضغط الزر لتتبّع خطوات البلع واحدة بعد الأخرى.</p><p class="r res" aria-live="polite">لم تبدأ بعد.</p><button class="main nx">ابدأ البلع</button>',
+ b:function(r){var st=['الخطوة 1: اللسان يدفع اللقمة إلى الخلف نحو البلعوم.','الخطوة 2: لسان المزمار يغلق القصبة الهوائية فلا يدخل الطعام إلى الرئتين.','الخطوة 3: المريء يبدأ الحركة الدودية ويدفع اللقمة إلى الأسفل.','الخطوة 4: تصل اللقمة إلى المعدة. اكتملت الرحلة في هذه المحطة.'],i=0,res=$('.res',r),b=$('.nx',r);b.onclick=function(){if(i>=st.length){i=0;res.textContent='لم تبدأ بعد.';b.textContent='ابدأ البلع';return}res.textContent=st[i];say(st[i],res);i++;b.textContent=i>=st.length?'من البداية':'الخطوة التالية'}}},
+sl({intro:'حرّك المؤشر لتغيير درجة الحموضة pH داخل المعدة، ولاحظ متى يعمل الببسين. كلما قلّ الرقم زادت الحموضة.',label:'درجة الحموضة pH',unit:'',min:1,max:7,step:1,val:2,meter:1,out:function(v){return{p:Math.round((8-v)/7*100),t:v<=3?'pH '+v+': وسط شديد الحموضة. الببسين يعمل جيدًا ويُقتل كثير من الجراثيم.':v<=5?'pH '+v+': الحموضة ضعيفة. الببسين يعمل ببطء.':'pH '+v+': الوسط شبه متعادل. الببسين لا يعمل تقريبًا.'}}}),
+{h:'<p class="r">اختر نوع الغذاء لتعرف من يهضمه وإلى ماذا يتحول.</p><label class="r">الغذاء <select><option value="">اختر...</option><option value="0">النشا</option><option value="1">البروتين</option><option value="2">الدهون</option></select></label><p class="r res" aria-live="polite">لم تختر بعد.</p>',
+ b:function(r){var o=['النشا: يهضمه إنزيم الأميليز في الفم ثم إنزيمات البنكرياس، ويتحول إلى سكر بسيط يمتصه الدم.','البروتين: يبدأ هضمه الببسين في المعدة ثم تكمله إنزيمات البنكرياس، ويتحول إلى أحماض أمينية.','الدهون: تفتّتها الصفراء ثم يهضمها إنزيم الليباز، وتتحول إلى أحماض دهنية وجليسرول.'],res=$('.res',r);$('select',r).onchange=function(){if(this.value==='')return;res.textContent=o[this.value];say(o[this.value],res)}}},
+sl({intro:'حرّك المؤشر لترى أين يكون الطعام بعد عدد من الساعات من تناوله. الأزمنة تقريبية وتختلف من شخص لآخر.',label:'الزمن بعد الأكل',unit:'ساعة',min:0,max:48,step:1,val:0,meter:1,out:function(v){return{p:Math.round(v/48*100),t:v===0?'لحظة تناول الطعام: الطعام في الفم.':v<=3?'بعد '+v+' ساعة: الطعام في المعدة غالبًا.':v<=6?'بعد '+v+' ساعات: الطعام في الأمعاء الدقيقة غالبًا.':'بعد '+v+' ساعة: بقايا الطعام في الأمعاء الغليظة، وهنا يُمتص الماء.'}}})
+];
+
+/* ---------- quiz ---------- */
+function quizHTML(key,qs){
+  QS[key]=qs.map(function(q){return shuf(q[1].map(function(o,j){return{o:o,ok:j===q[2]}}))});
+  return '<div class="quiz" data-k="'+key+'">'+qs.map(function(q,i){return '<fieldset class="qq"><legend class="r">'+(i+1)+'. '+q[0]+'</legend>'+QS[key][i].map(function(o,j){return '<label class="opt r"><input type="radio" name="'+key+'_'+i+'" value="'+j+'"> '+o.o+'</label>'}).join('')+'<p class="fb r" hidden></p></fieldset>'}).join('')+'<button class="main chk">تحقق من إجاباتي</button><p class="r score" role="status"></p></div>';
+}
+function bindQuiz(key,qs){
+  var box=$('.quiz[data-k="'+key+'"]'),btn=$('.chk',box);
+  btn.onclick=function(){
+    if(btn.dataset.done){var t=document.createElement('div');t.innerHTML=quizHTML(key,qs);var nb=t.firstChild;box.replaceWith(nb);mkr(nb);bindQuiz(key,qs);$('legend',nb).scrollIntoView({block:'center'});return}
+    var n=0;
+    box.querySelectorAll('fieldset').forEach(function(f,i){
+      var c=f.querySelector('input:checked'),fb=$('.fb',f),opts=QS[key][i],right=opts.filter(function(o){return o.ok})[0].o,ok=c&&opts[+c.value].ok;
+      if(ok)n++;
+      fb.hidden=false;fb.className='fb r '+(ok?'ok':'bad');
+      fb.textContent=ok?'✓ إجابة صحيحة. '+qs[i][3]:(c?'✗ إجابة خاطئة. ':'✗ لم تختر إجابة. ')+'الصحيحة: '+right+'. '+qs[i][3];
+      f.querySelectorAll('input').forEach(function(x){x.disabled=true});
+    });
+    scores[key]=[n,qs.length];
+    var sc=$('.score',box),msg='نتيجتك: '+n+' من '+qs.length+(n===qs.length?'. أحسنت!':'. راجع الشرح وأعد المحاولة.');
+    sc.textContent=msg;btn.textContent='أعد الاختبار';btn.dataset.done=1;say(msg,sc);if(n===qs.length)party();
+  };
+}
+
+/* ---------- views ---------- */
+function allQs(){var F=[];S.forEach(function(s){F.push(s.q[0],s.q[2])});return F}
+var COL=['#e5604d','#e08a1e','#c9a400','#d6498a','#3b82c4'];
+function prog(){var n=0;for(var k=0;k<5;k++)if(scores['s'+k])n++;return '<div class="r prog" role="progressbar" aria-valuemin="0" aria-valuemax="5" aria-valuenow="'+n+'" aria-label="تقدّمك">تقدّمك: أكملت '+n+' من 5 اختبارات</div><div class="track" aria-hidden="true"><span style="width:'+(n*20)+'%"></span></div>'}
+function party(){if(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches)return;var c=['#ffd54a','#e5604d','#3b82c4','#4fc3ae','#d6498a'];for(var i=0;i<36;i++){var s=document.createElement('span');s.className='cf';s.setAttribute('aria-hidden','true');s.style.left=Math.random()*100+'vw';s.style.background=c[i%5];s.style.animationDelay=Math.random()*.5+'s';document.body.appendChild(s);setTimeout(function(x){x.remove()},2800,s)}}
+function homeV(){
+  return '<section class="hero"><h1 class="r" tabindex="-1">رحلة الطعام في الجهاز الهضمي</h1><p class="r lead">الجهاز الهضمي أنبوب طويل يبلغ طوله نحو تسعة أمتار، يبدأ بالفم وينتهي بالشرج. وظيفته تحويل الطعام إلى مواد بسيطة يستطيع الجسم امتصاصها. اختر محطة لتبدأ الرحلة.</p>'+prog()+'</section><div class="grid">'+
+  S.map(function(s,k){var sc=scores['s'+k];return '<button class="big r" data-go="s'+k+'" style="--c:'+COL[k]+';--i:'+k+'"><span class="ico" aria-hidden="true">'+s.i+'</span>المحطة '+['الأولى','الثانية','الثالثة','الرابعة','الخامسة'][k]+': '+s.t+(sc?'<small>نتيجتك '+sc[0]+' من '+sc[1]+'</small>':'')+'</button>'}).join('')+
+  '</div><h2 class="r">أدوات إضافية</h2><div class="grid"><button class="big alt r" data-go="gloss"><span class="ico" aria-hidden="true">📖</span>قاموس المصطلحات</button><button class="big alt r" data-go="final"><span class="ico" aria-hidden="true">📝</span>الاختبار النهائي'+(scores.final?'<small>نتيجتك '+scores.final[0]+' من '+scores.final[1]+'</small>':'')+'</button><button class="big alt r" data-go="lab"><span class="ico" aria-hidden="true">🧩</span>نشاط التركيب: ركّب الجهاز الهضمي</button></div>';
+}
+function stationV(k){
+  var s=S[k],nx=k<4?'<button class="main" data-go="s'+(k+1)+'">المحطة التالية: '+S[k+1].t+'</button>':'<button class="main" data-go="final">الاختبار النهائي</button><button data-go="lab">نشاط التركيب</button>';
+  return '<div class="steps" aria-hidden="true">'+S.map(function(x,j){return '<i class="'+(j===k?'cur':j<k?'past':'')+'"></i>'}).join('')+'</div><h1 class="r stitle" tabindex="-1" style="--c:'+COL[k]+'">المحطة '+['الأولى','الثانية','الثالثة','الرابعة','الخامسة'][k]+': '+s.t+'</h1><h2 class="r">الشرح</h2>'+s.d.map(function(p){return '<p class="r">'+p+'</p>'}).join('')+'<p class="r simple"><strong>بجمل بسيطة:</strong> '+s.s+'</p><h2 class="r">نشاط تفاعلي</h2><div class="panel" id="act">'+A[k].h+'</div><h2 class="r">اختبار تقويمي</h2>'+quizHTML('s'+k,s.q)+'<div class="nav"><button data-go="home">الرئيسية</button>'+(k>0?'<button data-go="s'+(k-1)+'">المحطة السابقة</button>':'')+nx+'</div>';
+}
+function glossV(){return '<h1 class="r" tabindex="-1">قاموس المصطلحات</h1><dl>'+G.map(function(g){return '<div class="r"><dt>'+g[0]+'</dt><dd>'+g[1]+'</dd></div>'}).join('')+'</dl><div class="nav"><button data-go="home">الرئيسية</button></div>'}
+function finalV(){return '<h1 class="r" tabindex="-1">الاختبار النهائي</h1><p class="r lead">عشرة أسئلة تغطي المحطات الخمس. اقرأ كل سؤال جيدًا ثم اضغط «تحقق من إجاباتي».</p>'+quizHTML('final',allQs())+'<div class="nav"><button data-go="home">الرئيسية</button><button data-go="lab">نشاط التركيب</button></div>'}
+
+/* ---------- assembly ---------- */
+var O=[
+{k:'mouth',n:'الفم',pos:'الموضع 1: في الرأس',clue:'الفم: أول محطة في الرحلة، ويقع في الرأس.',c:'#f6a6a6',sh:'<ellipse class="shp" cx="150" cy="48" rx="30" ry="15"/>',nx:150,ny:52,inn:1},
+{k:'esoph',n:'المريء',pos:'الموضع 2: أنبوب عمودي في الرقبة والصدر',clue:'المريء: أنبوب عمودي يصل الفم بالمعدة.',c:'#f3c58b',sh:'<rect class="shp" x="142" y="85" width="16" height="95" rx="8"/>',nx:272,ny:135},
+{k:'stomach',n:'المعدة',pos:'الموضع 3: أعلى البطن جهة يسار الجسم',clue:'المعدة: كيس عضلي في أعلى البطن جهة يسار الجسم.',c:'#f0e08a',sh:'<ellipse class="shp" cx="180" cy="205" rx="36" ry="27"/>',nx:180,ny:209,inn:1},
+{k:'liver',n:'الكبد',pos:'الموضع 4: أعلى البطن جهة يمين الجسم',clue:'الكبد: أكبر غدة في الجسم، في أعلى البطن جهة يمين الجسم.',c:'#c79a7a',sh:'<ellipse class="shp" cx="108" cy="195" rx="42" ry="24"/>',nx:108,ny:199,inn:1},
+{k:'pancreas',n:'البنكرياس',pos:'الموضع 5: شريط أفقي تحت المعدة',clue:'البنكرياس: غدة طويلة تقع خلف المعدة وتحتها.',c:'#e9d3a0',sh:'<ellipse class="shp" cx="150" cy="245" rx="42" ry="10"/>',nx:150,ny:249,inn:1},
+{k:'small',n:'الأمعاء الدقيقة',pos:'الموضع 6: وسط البطن، أنبوب ملتف',clue:'الأمعاء الدقيقة: أنبوب طويل ملتف في وسط البطن.',c:'#f5a9c9',sh:'<path class="shp" fill="none" d="M115 295h70v14h-70v14h70v14h-70v14h70"/>',nx:272,ny:318},
+{k:'large',n:'الأمعاء الغليظة',pos:'الموضع 7: إطار على شكل حرف U حول وسط البطن',clue:'الأمعاء الغليظة: إطار يحيط بالأمعاء الدقيقة من الجهات الثلاث.',c:'#9cc9ea',sh:'<path class="shp" fill="none" d="M98 365V272h104v93"/>',nx:150,ny:392}
+];
+function labV(){
+  var cards=shuf(O.slice()).map(function(o){return '<button class="r card" data-k="'+o.k+'" aria-pressed="false">'+o.n+'</button>'}).join('');
+  var svg='<svg class="body" viewBox="0 0 320 420" role="group" aria-label="مجسم الجسم الفارغ ذو سبعة مواضع"><circle class="outline" cx="150" cy="45" r="40"/><rect class="outline" x="70" y="125" width="160" height="275" rx="40"/>'+
+  O.map(function(o,i){return '<g class="slot r" data-k="'+o.k+'" role="button" tabindex="0" aria-label="'+o.pos+': فارغ">'+o.sh.replace('class="shp"','class="shp" style="stroke-width:'+(o.k==='small'||o.k==='large'?16:3)+'"')+'<text class="num" x="'+(o.k==='large'?204:o.k==='esoph'?150:o.k==='small'?200:o.nx)+'" y="'+(o.k==='large'?310:o.k==='esoph'?132:o.k==='small'?318:o.ny)+'">'+(i+1)+'</text><text class="lbl'+(o.inn?' in':'')+'" x="'+o.nx+'" y="'+o.ny+'">'+o.n+'</text></g>'}).join('')+'</svg>';
+  return '<h1 class="r" tabindex="-1">نشاط التركيب: ركّب الجهاز الهضمي</h1><p class="r lead">اختر عضوًا من الأزرار، فتسمع وصفًا لمكانه، ثم اختر الموضع المناسب له على المجسم (سبعة مواضع مرقّمة). عند الخطأ ستحصل على تلميح.</p><div class="cards" role="group" aria-label="أعضاء الجهاز الهضمي">'+cards+'</div><p class="r res" id="msg" aria-live="polite">اختر عضوًا للبدء.</p>'+svg+'<div class="nav"><button id="reset">أعد التركيب</button><button data-go="home">الرئيسية</button></div>';
+}
+function bindLab(){
+  var sel=null,done={},msg=$('#msg');
+  function m(t){msg.textContent=t;say(t,msg)}
+  app.querySelectorAll('.card').forEach(function(b){b.onclick=function(){if(b.disabled)return;sel=b.dataset.k;$('svg.body').classList.add('pick');app.querySelectorAll('.card').forEach(function(x){x.setAttribute('aria-pressed',x===b)});m(O.filter(function(o){return o.k===sel})[0].clue+' اختر الآن موضعه.')}});
+  function place(g){
+    var k=g.dataset.k;if(done[k]){m('هذا الموضع ممتلئ بالفعل.');return}
+    if(!sel){m('اختر عضوًا من الأزرار أولًا.');return}
+    var o=O.filter(function(x){return x.k===sel})[0];
+    if(sel!==k){m('ليس هنا. '+o.clue+' جرّب موضعًا آخر.');return}
+    done[k]=1;g.classList.add('on');var sh=g.querySelector('.shp');if(k==='small'||k==='large'){sh.style.stroke=o.c}else{sh.style.fill=o.c}sh.setAttribute('aria-hidden','true');
+    g.setAttribute('aria-label',o.pos+': ممتلئ بـ'+o.n);
+    var cd=app.querySelector('.card[data-k="'+k+'"]');cd.disabled=true;cd.setAttribute('aria-pressed','false');sel=null;
+    var n=Object.keys(done).length;if(n===7)party();
+    m(n===7?'أحسنت! ركّبت الجهاز الهضمي كاملًا: الفم، ثم المريء، ثم المعدة، مع الكبد والبنكرياس، ثم الأمعاء الدقيقة، ثم الغليظة.':'صحيح! وضعت '+o.n+' في مكانه. تبقّى '+(7-n)+' من الأعضاء.');
+  }
+  app.querySelectorAll('.slot').forEach(function(g){g.onclick=function(){place(g)};g.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();place(g)}}});
+  $('#reset').onclick=function(){go('lab')};
+}
+
+function go(v){
+  stop();view=v;
+  app.innerHTML=v==='home'?homeV():v==='gloss'?glossV():v==='final'?finalV():v==='lab'?labV():stationV(+v.slice(1));
+  mkr(app);
+  if(v[0]==='s'&&v.length===2){var k=+v[1];$('#act').innerHTML=A[k].h;A[k].b($('#act'));bindQuiz(v,S[k].q)}
+  if(v==='final')bindQuiz('final',allQs());
+  if(v==='lab')bindLab();
+  var h=$('h1');if(h){h.focus({preventScroll:true})}window.scrollTo(0,0);
+}
+app.addEventListener('click',function(e){var b=e.target.closest('[data-go]');if(b)go(b.dataset.go)});
+document.getElementById('home').onclick=function(){go('home')};
+
+/* ---------- speech controls ---------- */
+function setOn(v){
+  on=v;toggle.setAttribute('aria-pressed',v);toggle.textContent=v?'إيقاف القراءة الصوتية':'تشغيل القراءة الصوتية';
+  if(v){if(synth&&!voice)pickVoice();setStatus(voice||!synth?'القراءة الصوتية تعمل. مرّر المؤشر فوق أي سطر أو تنقّل بمفتاح Tab.':'القراءة الصوتية تعمل، لكن لم يُعثر على صوت عربي في جهازك، وقد يكون النطق غير دقيق.');say('تم تشغيل القراءة الصوتية')}
+  else{stop();setStatus('القراءة الصوتية متوقفة.')}
+}
+toggle.onclick=function(){setOn(!on)};
+document.getElementById('stop').onclick=function(){stop();setStatus('تم إيقاف الصوت.')};
+document.addEventListener('mouseover',function(e){
+  if(!on)return;var el=e.target.closest&&e.target.closest('.r');if(!el||el===lastHover)return;lastHover=el;clearTimeout(timer);
+  timer=setTimeout(function(){stopQ=true;say(txt(el),el)},250);
+});
+document.addEventListener('mouseout',function(e){var el=e.target.closest&&e.target.closest('.r');if(el&&!el.contains(e.relatedTarget)){if(lastHover===el)lastHover=null;clearTimeout(timer)}});
+document.addEventListener('focusin',function(e){if(!on)return;var el=e.target.closest&&e.target.closest('.r');if(el){stopQ=true;say(txt(el),el)}});
+document.addEventListener('touchstart',function(e){if(!on)return;var el=e.target.closest&&e.target.closest('.r');if(el){stopQ=true;say(txt(el),el)}},{passive:true});
+document.getElementById('readall').onclick=function(){
+  if(!on)setOn(true);stopQ=false;var i=0,list=Array.prototype.slice.call(app.querySelectorAll('.r')).filter(function(x){return !x.hidden&&!x.closest('[hidden]')});
+  (function next(){if(stopQ||i>=list.length)return;var el=list[i++];el.scrollIntoView({block:'center'});say(txt(el),el,function(){setTimeout(next,150)})})();
+};
+document.addEventListener('keydown',function(e){if(e.key==='Escape')stop()});
+var size=1.25;function ap(){document.documentElement.style.setProperty('--fs',size+'rem')}
+document.getElementById('bigger').onclick=function(){size=Math.min(2.2,size+.15);ap()};
+document.getElementById('smaller').onclick=function(){size=Math.max(1,size-.15);ap()};
+go('home');
+})();
+</script>
+</body>
+</html>
